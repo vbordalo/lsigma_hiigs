@@ -83,17 +83,22 @@ def leastsq(X,y, method=5):
         gamma23 = gamma1*beta1p1 # Eq. 17
         avar = np.sqrt(np.sum((ydif-beta*xdif-n*xbar*(gamma13*xdif*(ydif-beta1*xdif)/sxx + \
                                                       gamma23*ydif*(ydif-beta2*xdif)/sxy))**2)/n**2) # Eq. 9,12,17,20
-
+    """
+    TO DO: Implement avar for the methods 4 and 5.
+    Check reference for the method 6.
+    """
     if method == 4:
         #Orthogonal: minimise perpendicular distance from line to points
         beta = 0.5*((beta2-1./beta1)+np.sign(sxy)*np.sqrt(4+(beta2-1./beta1)**2))
         prefac = beta**2 / (4*beta1**2 + (beta1*beta2 - 1)**2)
         bvar = prefac * ( bvar1/beta1**2 + 2*covb12 + beta1**2*bvar2 )
+        avar = 0
 
     if method == 5:
         #Reduced major axis:
         beta = np.sign(sxy)*np.sqrt(beta1*beta2)
         bvar = 0.25 * (beta2/beta1 * bvar1 + 2*covb12 + beta1/beta2 * bvar2)
+        avar = 0
 
     if method == 6:
         #Theil-Sen estimator for uncensored data: the median of the slopes.
@@ -103,6 +108,7 @@ def leastsq(X,y, method=5):
         beta = np.median(yy[ind]/xx[ind])
         #Can't find a formula for the variance
         bvar = 0
+        avar = 0
 
     #The intercept
     alpha = ybar - beta*xbar
