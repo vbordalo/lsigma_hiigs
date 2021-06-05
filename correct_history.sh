@@ -1,5 +1,5 @@
 #!/bin/sh
-git filter-branch --env-filter -f'
+git filter-branch --env-filter --force'
 OLD_EMAIL1="vinicius@biotonix.com"
 OLD_EMAIL2="36831295+vbordalo@users.noreply.github.com"
 CORRECT_NAME="vbordalo"
