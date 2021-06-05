@@ -1,2 +1,5 @@
 .ipynb_checkpoints/
 env/
+cours_python_nicko.ipynb
+__pycache__/
+.DS_Store
